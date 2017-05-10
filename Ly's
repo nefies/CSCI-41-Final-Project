@@ -1,0 +1,60 @@
+#include <iostream>
+#include <string>
+#include <cstdint>
+
+using namespace std;
+
+enum letters {a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z};
+
+typedef int8_t int8; // limits variables to 8-bit
+
+
+class hash{
+    private:
+        static const int tableSize = 26; //set table size for the letters
+        struct variable {
+            letters var;
+            int8 value = 0;
+            variable *next;
+        };
+
+        variable* HashTable[tableSize];
+
+    public:
+        hash(){
+            for (int i=0; i < tableSize; i++){
+                HashTable[i] = new variable;
+                HashTable[i] -> value = 0;
+                HashTable[i] -> next = NULL;
+                HashTable[i] -> var = letters(i);//var will hold the letters, typecast i will correspond to the letters
+            }
+        }
+        void set_value(char x, int8 y){
+            if (HashTable[letters(x)]-> value  == 0){ //char to letters, and sets value only if value is set to 0
+                HashTable[letters(x)]-> value  = y;
+            }
+            else {
+                cout << "Invalid" << endl;
+            }
+        }
+        void adjust_value(char x, int8 y){
+            HashTable[letters(x)] -> value = y+1;
+        }
+        int8 get_value(char x){
+            int8 temp = HashTable[letters(x)]-> value;
+            adjust_value(x, temp);
+            return temp;
+        }
+};
+
+int main(){
+    hash table;
+    string a;
+    char b;
+    int c;
+    cout << "Welcome to our lackluster source of entertainment! Marvel at our unfortunately simplistic next-to-useless RPN calculator. Buuut there's a twist! With no mathematical sense this calculator will increment a variable by one everytime it's used!\n";
+    while (true){
+        cout << "Input calculations. Syntax will be Let x = 4 to set a varible. Other wise it will act as any other RPN calculator.\n";
+
+    }
+}
